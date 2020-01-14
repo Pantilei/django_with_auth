@@ -1,0 +1,16 @@
+{%extends 'base_layout.html'%}
+
+
+{% block content %}
+  <h1>Log In</h1>
+  <form class="site-form" action="{% url 'accounts:login'%}" method="post">
+    {% csrf_token %}
+    {{form}}
+    {% if request.GET.next %} <!-if there is no next this condition is not satisfied->
+      <input type="hidden" name="next" value="{{request.GET.next}}"><!–here we are geting the URL that comes after next and give to this value the name 'next' –>
+    {% endif %}
+    <input type="submit" name="" value="Login"> <!–then when we make POST request by pressing Login button 'next' will come along with POST request. Then we can have access to this POST request inside views.py–>
+  </form>
+
+
+{% endblock %}
